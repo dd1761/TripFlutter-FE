@@ -10,3 +10,4 @@
 - 컴포넌트 파일 명은 대문자로 시작하는 Upper Camel Case로 작성 부탁드립니다.
 - 컴포넌트 파일에서 Export 되는 함수형 컴포넌트는 React.FC 타입 정의 부탁드립니다.
 - useState를 사용해야 하는 컴포넌트는 "use client"; 를 선언 부탁드립니다.
+- 되도록이면 하위 디렉토리 생성 없이 app/component 하위에만 작성 부탁드립니다.
