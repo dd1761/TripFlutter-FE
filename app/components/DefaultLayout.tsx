@@ -1,4 +1,5 @@
-import styled from "styled-components";
+"use client";
+import { styled } from "styled-components";
 
 interface DefaultLayoutProps {
   // 자식 Node
@@ -27,7 +28,7 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   return (
     <LayoutWrapper>
       <ContentsContainer top={top} right={right} bottom={bottom} left={left}>
-        {children}
+        <>{children}</>
       </ContentsContainer>
     </LayoutWrapper>
   );
