@@ -3,6 +3,7 @@ import DefaultLayout from "./components/DefaultLayout";
 import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
 import LocationThumbNailCard from "./components/main/LocationThumbNailCard";
+import PopularLocationCard from "./components/main/PopularLocationCard";
 
 const Home: React.FC = () => {
   const DUMMY_LOCATION: string[] = [
@@ -14,6 +15,27 @@ const Home: React.FC = () => {
     "전북",
     "전남",
     "제주",
+  ];
+
+  const DUMMY_POPULAR_LOCATION = [
+    {
+      img: "",
+      rank: 1,
+      locationName: "우도",
+      tags: ["해변", "바다", "휴양지"],
+    },
+    {
+      img: "",
+      rank: 2,
+      locationName: "설악산",
+      tags: ["산", "자연", "등산"],
+    },
+    {
+      img: "",
+      rank: 3,
+      locationName: "하남 스타필드",
+      tags: ["도심", "쇼핑", "먹거리"],
+    },
   ];
 
   return (
@@ -41,14 +63,19 @@ const Home: React.FC = () => {
 
       <ContentsContainer>
         <ContentsTitle>지금 가장 인기있는 국내 여행지</ContentsTitle>
-        <PopularLocationCard />
-        <PopularLocationCard />
-        <PopularLocationCard />
+        {DUMMY_POPULAR_LOCATION.map((location, index: number) => (
+          <PopularLocationCard
+            key={index}
+            img={location.img}
+            locationName={location.locationName}
+            rank={location.rank}
+            tags={location.tags}
+          />
+        ))}
       </ContentsContainer>
     </DefaultLayout>
   );
 };
-
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   isBorder,
@@ -61,86 +88,10 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   );
 };
 
-const PopularLocationCard: React.FC = () => {
-  return (
-    <PopularLocationCardContainer>
-      <LocationImage />
-      <LocationTitle>
-        <span>1.</span> 강원도 정선
-      </LocationTitle>
-      <TagList>
-        <Tag tagText={"하이원리조트"} />
-        <Tag tagText={"하이원리조트"} />
-        <Tag tagText={"하이원리조트"} />
-      </TagList>
-    </PopularLocationCardContainer>
-  );
-};
-
-const Tag: React.FC<TagProps> = ({ tagText }) => {
-  return (
-    <TagContainer>
-      <span>#</span>
-      {tagText}
-    </TagContainer>
-  );
-};
-
 interface StyledButtonProps {
   isBorder?: boolean;
   buttonText: string;
 }
-
-interface TagProps {
-  tagText: string;
-}
-
-const TagList = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: 16px;
-  border: 1px solid ${COLORS.greyColor};
-
-  & > span {
-    color: ${COLORS.mainColor};
-    font-weight: 700;
-  }
-`;
-
-const PopularLocationCardContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const LocationImage = styled.div`
-  width: 100%;
-  height: 200px;
-  background-color: ${COLORS.greyColor};
-  border-radius: 8px;
-`;
-
-const LocationTitle = styled.div`
-  font-size: 20px;
-  line-height: 20px;
-  font-weight: 700;
-
-  & > span {
-    color: ${COLORS.mainColor};
-  }
-`;
 
 const ButtonContainer = styled.button<{ isBorder?: boolean }>`
   width: 100%;
