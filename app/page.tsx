@@ -2,8 +2,20 @@
 import DefaultLayout from "./components/DefaultLayout";
 import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
+import LocationThumbNailCard from "./components/main/LocationThumbNailCard";
 
 const Home: React.FC = () => {
+  const DUMMY_LOCATION: string[] = [
+    "서울",
+    "경기",
+    "강원",
+    "충북",
+    "충남",
+    "전북",
+    "전남",
+    "제주",
+  ];
+
   return (
     <DefaultLayout top={0} right={0} bottom={0} left={0}>
       <HomeContainer>
@@ -11,14 +23,12 @@ const Home: React.FC = () => {
       </HomeContainer>
 
       <LocationContainer>
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
-        <LocationCard />
+        {DUMMY_LOCATION.map((location: string, index: number) => (
+          <LocationThumbNailCard
+            key={location + index}
+            locationName={location}
+          />
+        ))}
       </LocationContainer>
 
       <ContentsContainer>
@@ -39,14 +49,6 @@ const Home: React.FC = () => {
   );
 };
 
-const LocationCard: React.FC = () => {
-  return (
-    <LocationCardContainer>
-      <LocationThumbnail />
-      <LocationName>서울</LocationName>
-    </LocationCardContainer>
-  );
-};
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   isBorder,
@@ -171,26 +173,6 @@ const ButtonContainer = styled.button<{ isBorder?: boolean }>`
         : COLORS.mainColor};
     transition: 0.2s;
   }
-`;
-
-const LocationCardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-`;
-
-const LocationThumbnail = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: ${COLORS.greyColor};
-`;
-
-const LocationName = styled.div`
-  font-size: 12px;
-  line-height: 12px;
-  font-weight: 500;
 `;
 
 const HomeContainer = styled.div`
