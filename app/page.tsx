@@ -4,6 +4,7 @@ import { COLORS } from "@/public/styles/colors";
 import styled from "styled-components";
 import LocationThumbNailCard from "./components/main/LocationThumbNailCard";
 import PopularLocationCard from "./components/main/PopularLocationCard";
+import StyledButton from "./components/commons/StyledButton";
 
 const Home: React.FC = () => {
   const DUMMY_LOCATION: string[] = [
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
         <ContentsTitle>바로 여행 계획하기</ContentsTitle>
         <StyledButton
           isBorder={true}
-          buttonText="트리플러터에게 가고 싶은 여행을 알려주세요!"
+          buttonText={"트리플러터에게 떠나고 싶은 여행을 알려주세요!"}
         />
       </ContentsContainer>
 
@@ -76,55 +77,6 @@ const Home: React.FC = () => {
     </DefaultLayout>
   );
 };
-
-const StyledButton: React.FC<StyledButtonProps> = ({
-  isBorder,
-  buttonText,
-}) => {
-  return (
-    isBorder && (
-      <ButtonContainer isBorder={isBorder}>{buttonText}</ButtonContainer>
-    )
-  );
-};
-
-interface StyledButtonProps {
-  isBorder?: boolean;
-  buttonText: string;
-}
-
-const ButtonContainer = styled.button<{ isBorder?: boolean }>`
-  width: 100%;
-  ${(props) =>
-    props.isBorder &&
-    props.isBorder === true &&
-    `border: 2px solid ${COLORS.mainColor}`};
-  color: ${(props) =>
-    props.isBorder && props.isBorder === true
-      ? COLORS.mainColor
-      : COLORS.whiteColor};
-  background-color: ${(props) =>
-    props.isBorder && props.isBorder === true
-      ? COLORS.whiteColor
-      : COLORS.mainColor};
-  border-radius: 8px;
-  padding: 8px;
-  font-size: 12px;
-  font-weight: 900;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${(props) =>
-      props.isBorder && props.isBorder === true
-        ? COLORS.mainColor
-        : COLORS.whiteColor};
-    color: ${(props) =>
-      props.isBorder && props.isBorder === true
-        ? COLORS.whiteColor
-        : COLORS.mainColor};
-    transition: 0.2s;
-  }
-`;
 
 const HomeContainer = styled.div`
   width: calc(100% - 40px);
