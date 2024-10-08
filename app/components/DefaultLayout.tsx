@@ -1,5 +1,6 @@
 "use client";
 import { styled } from "styled-components";
+import { COLORS } from "@/public/styles/colors";
 
 interface DefaultLayoutProps {
   // 자식 Node
@@ -40,7 +41,9 @@ const LayoutWrapper = styled.div`
   width: 100%;
   min-height: 100dvh;
 
-  border: 1px solid black;
+  border: 0.5px solid ${COLORS.greyColor};
+  border-top: none;
+  border-bottom: none;
 
   overflow-y: scroll;
 
@@ -50,10 +53,6 @@ const LayoutWrapper = styled.div`
 
   -ms-overflow-style: none;
   scrollbar-width: none;
-
-  @media (min-width: 601px) {
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1), 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
 `;
 
 const ContentsContainer = styled.div<ContentsContainerProps>`
