@@ -4,6 +4,13 @@ import { COLORS } from "@/public/styles/colors";
 import Image, { StaticImageData } from "next/image";
 import Tag from "../commons/Tag";
 
+/*
+  TODO
+  
+  StaticImageData는 로컬 이미지를 import하여 next/image를 통해 최적화 하기 위해 사용되므로
+  실제 API를 연동할 경우 string으로 수정하여야 하며 next/image 최적화를 다시 진행하여야 함.
+*/
+
 interface PopularLocationCardProps {
   img: StaticImageData;
   rank: number;
@@ -24,7 +31,7 @@ const PopularLocationCard: React.FC<PopularLocationCardProps> = ({
           src={img}
           alt={locationName}
           layout="fill"
-          loading="lazy"
+          placeholder="blur"
           objectFit="cover"
           style={{ borderRadius: "8px" }}
         />
