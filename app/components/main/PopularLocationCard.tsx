@@ -1,11 +1,11 @@
 "use client";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
-
+import Image from "next/image";
 import Tag from "../commons/Tag";
 
 interface PopularLocationCardProps {
-  img?: string;
+  img: string;
   rank: number;
   locationName: string;
   tags: string[];
@@ -19,7 +19,16 @@ const PopularLocationCard: React.FC<PopularLocationCardProps> = ({
 }) => {
   return (
     <PopularLocationCardContainer>
-      <LocationImage />
+      <LocationImage>
+        <Image
+          src={img}
+          alt={locationName}
+          layout="fill"
+          loading="lazy"
+          objectFit="cover"
+          style={{ borderRadius: "8px" }}
+        />
+      </LocationImage>
       <LocationTitle>
         <span>{rank}.</span> {locationName}
       </LocationTitle>
@@ -40,6 +49,7 @@ const PopularLocationCardContainer = styled.div`
 `;
 
 const LocationImage = styled.div`
+  position: relative;
   width: 100%;
   height: 200px;
   background-color: ${COLORS.greyColor};

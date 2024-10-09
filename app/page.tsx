@@ -5,6 +5,7 @@ import styled from "styled-components";
 import LocationThumbNailCard from "./components/main/LocationThumbNailCard";
 import PopularLocationCard from "./components/main/PopularLocationCard";
 import StyledButton from "./components/commons/StyledButton";
+import DUMMY_UDO from "/public/images/dummy_udo.png";
 
 const Home: React.FC = () => {
   const DUMMY_LOCATION: string[] = [
@@ -20,19 +21,19 @@ const Home: React.FC = () => {
 
   const DUMMY_POPULAR_LOCATION = [
     {
-      img: "",
+      img: DUMMY_UDO,
       rank: 1,
       locationName: "우도",
       tags: ["해변", "바다", "휴양지"],
     },
     {
-      img: "",
+      img: DUMMY_UDO,
       rank: 2,
       locationName: "설악산",
       tags: ["산", "자연", "등산"],
     },
     {
-      img: "",
+      img: DUMMY_UDO,
       rank: 3,
       locationName: "하남 스타필드",
       tags: ["도심", "쇼핑", "먹거리"],

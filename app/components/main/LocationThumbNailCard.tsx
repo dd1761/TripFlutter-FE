@@ -1,6 +1,8 @@
 "use client";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
+import Image from "next/image";
+import DUMMY_THUMB from "/public/images/dummy_seoul.jpeg";
 
 interface LocationRankCardProps {
   img?: string;
@@ -13,7 +15,16 @@ const LocationThumbNailCard: React.FC<LocationRankCardProps> = ({
 }) => {
   return (
     <LocationCardContainer>
-      <LocationThumbnail />
+      <LocationThumbnail>
+        <Image
+          src={DUMMY_THUMB}
+          alt={locationName}
+          layout="fill"
+          loading="lazy"
+          objectFit="cover"
+          style={{ borderRadius: "50%" }}
+        />
+      </LocationThumbnail>
       <LocationName>{locationName}</LocationName>
     </LocationCardContainer>
   );
@@ -27,10 +38,13 @@ const LocationCardContainer = styled.div`
 `;
 
 const LocationThumbnail = styled.div`
+  position: relative;
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: ${COLORS.greyColor};
+
+  & > img {
+  }
 `;
 
 const LocationName = styled.div`
