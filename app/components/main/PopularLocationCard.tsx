@@ -1,11 +1,11 @@
 "use client";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Tag from "../commons/Tag";
 
 interface PopularLocationCardProps {
-  img: string;
+  img: StaticImageData;
   rank: number;
   locationName: string;
   tags: string[];
