@@ -40,7 +40,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <DefaultLayout top={0} right={0} bottom={0} left={0}>
+    <DefaultLayout top={0} right={0} bottom={0} left={0} nav={true}>
       <HomeContainer>
         <Header>TripFlutter</Header>
       </HomeContainer>

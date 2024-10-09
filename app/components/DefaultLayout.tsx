@@ -11,6 +11,8 @@ interface DefaultLayoutProps {
   bottom: number;
   left: number;
   // 상,우,하,좌 여백을 설정하기 위한 props
+  nav: boolean;
+  // 내비게이션 바 표시 여부
 }
 
 interface ContentsContainerProps {
@@ -26,12 +28,13 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   right,
   bottom,
   left,
+  nav,
 }) => {
   return (
     <LayoutWrapper>
       <ContentsContainer top={top} right={right} bottom={bottom} left={left}>
         <ChildrenContainer>{children}</ChildrenContainer>
-        <BottomNav />
+        {nav && <BottomNav />}
       </ContentsContainer>
     </LayoutWrapper>
   );
