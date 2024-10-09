@@ -28,7 +28,15 @@ const BottomNav: React.FC = () => {
           width={28}
           height={28}
         />
-        <ItemTitle>여행 계획</ItemTitle>
+        <ItemTitle
+          $color={
+            currentPath === "/trip/create"
+              ? COLORS.blackColor
+              : COLORS.greyColor
+          }
+        >
+          여행 계획
+        </ItemTitle>
       </ItemContainer>
 
       <ItemContainer
@@ -43,7 +51,13 @@ const BottomNav: React.FC = () => {
           width={28}
           height={28}
         />
-        <ItemTitle>커뮤니티</ItemTitle>
+        <ItemTitle
+          $color={
+            currentPath === "/community" ? COLORS.blackColor : COLORS.greyColor
+          }
+        >
+          커뮤니티
+        </ItemTitle>
       </ItemContainer>
 
       <ItemContainer
@@ -56,7 +70,11 @@ const BottomNav: React.FC = () => {
           width={28}
           height={28}
         />
-        <ItemTitle>홈</ItemTitle>
+        <ItemTitle
+          $color={currentPath === "/" ? COLORS.blackColor : COLORS.greyColor}
+        >
+          홈
+        </ItemTitle>
       </ItemContainer>
 
       <ItemContainer
@@ -71,7 +89,15 @@ const BottomNav: React.FC = () => {
           width={28}
           height={28}
         />
-        <ItemTitle>내 여행</ItemTitle>
+        <ItemTitle
+          $color={
+            currentPath === "/mypage/trip"
+              ? COLORS.blackColor
+              : COLORS.greyColor
+          }
+        >
+          내 여행
+        </ItemTitle>
       </ItemContainer>
 
       <ItemContainer
@@ -86,7 +112,13 @@ const BottomNav: React.FC = () => {
           width={28}
           height={28}
         />
-        <ItemTitle>마이페이지</ItemTitle>
+        <ItemTitle
+          $color={
+            currentPath === "/mypage" ? COLORS.blackColor : COLORS.greyColor
+          }
+        >
+          마이페이지
+        </ItemTitle>
       </ItemContainer>
     </NavContainer>
   );
@@ -121,11 +153,11 @@ const ItemContainer = styled.div`
   gap: 12px;
 `;
 
-const ItemTitle = styled.div`
+const ItemTitle = styled.div<{ $color: string }>`
   font-size: 12px;
   line-height: 12px;
   font-weight: 700;
-  color: ${COLORS.greyColor};
+  color: ${(props) => props.$color};
 `;
 
 export default BottomNav;
