@@ -38,15 +38,15 @@ const LoginPage: React.FC = () => {
         </Header>
 
         <Contents>
-          <LogoContainer>
-            <Image
-              src={Logo}
-              alt={"trip-flutter logo"}
-              fill={true}
-              priority={true}
-              sizes="(max-width: 600px) 100vw, 600px"
-            />
-          </LogoContainer>
+          <Image
+            src={Logo}
+            layout="responsive"
+            width={200}
+            height={50}
+            sizes="(max-width: 600px) 100vw, 600px"
+            alt={"logo"}
+            priority={true}
+          />
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
             <InputContainer>
               <div className={"input-title"}>이메일</div>
@@ -87,6 +87,7 @@ const LoginPage: React.FC = () => {
 };
 
 const LoginContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,8 +135,11 @@ const Contents = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 32px;
 
   width: calc(100% - 40px);
+
+  margin-top: 200px;
 `;
 
 const StyledForm = styled.form`
@@ -204,10 +208,4 @@ const OtherMenu = styled.div`
     font-weight: 500;
   }
 `;
-
-const LogoContainer = styled.div`
-  position: relative;
-  object-fit: "contain";
-`;
-
 export default LoginPage;
