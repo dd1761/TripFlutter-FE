@@ -8,6 +8,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import Logo from "/public/images/logos/Trip-Flutter.png";
 
+/*
+  TODO
+
+  - 메인 화면 하단 네비게이션 바에서 '마이페이지' 메뉴 클릭시 '로그인이 필요합니다' 안내 후 로그인 화면으로 이동하는 모달 구현
+  - 
+*/
+
 interface LoginInput {
   email: string;
   password: string;
