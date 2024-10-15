@@ -1,6 +1,5 @@
 import { connectDB } from "@/utils/database";
 
-// 별도의 함수에서 title과 content를 매개변수로 받음
 async function createPost(title, content) {
     if (!title || title.trim() === '') {
         throw new Error('제목을 입력해주세요');
