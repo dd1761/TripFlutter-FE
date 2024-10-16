@@ -3,10 +3,10 @@ import Link from "next/link";
 import DefaultLayout from "@/app/components/DefaultLayout";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
-import { ArrowLeft } from "@/app/components/commons/Icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import Logo from "/public/images/logos/Trip-Flutter.png";
+import CommonHeader from "@/app/components/commons/CommonHeader";
 
 /*
   TODO
@@ -37,12 +37,7 @@ const LoginPage: React.FC = () => {
   return (
     <DefaultLayout top={0} right={0} bottom={0} left={0} nav={false}>
       <LoginContainer>
-        <Header>
-          <BackButton href={"/"}>
-            <ArrowLeft width={16} height={16} color={COLORS.blackColor} />
-          </BackButton>
-          <Title>로그인</Title>
-        </Header>
+        <CommonHeader backLink={"/"} headerTitle={'로그인'} />
 
         <Contents>
           <Image
@@ -104,38 +99,6 @@ const LoginContainer = styled.div`
   max-width: 600px;
   width: 100%;
   height: 100%;
-`;
-
-const Header = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  width: calc(100% - 40px);
-  padding: 20px;
-`;
-
-const BackButton = styled(Link)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 40px;
-  height: 40px;
-
-  all: unset;
-  cursor: pointer;
-  text-decoration: none;
-`;
-
-const Title = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-
-  font-size: 20px;
-  font-weight: 700;
-  color: ${COLORS.blackColor};
 `;
 
 const Contents = styled.div`
