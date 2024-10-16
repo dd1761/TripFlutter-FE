@@ -60,6 +60,8 @@ const Home: React.FC = () => {
         <StyledButton
           isBorder={true}
           buttonText={"트리플러터에게 떠나고 싶은 여행을 알려주세요!"}
+          fontSize={16}
+          link={"trip/create"}
         />
       </ContentsContainer>
 
