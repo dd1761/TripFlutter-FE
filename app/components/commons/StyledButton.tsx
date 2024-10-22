@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 interface StyledButtonProps {
   isBorder: boolean;
+  isActive?: boolean;
   buttonText: string;
   action?: any;
   link: string;
@@ -17,6 +18,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   action,
   link,
   fontSize,
+  isActive,
 }) => {
   const router = useRouter();
 
@@ -31,13 +33,20 @@ const StyledButton: React.FC<StyledButtonProps> = ({
       onClick={() => {
         buttonClikHandler(link);
       }}
+      isActive={isActive !== undefined ? isActive : true}
     >
       {buttonText}
     </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.button<{ isBorder: boolean; fontSize: number }>`
+const ButtonContainer = styled.button<{
+  isBorder: boolean;
+  fontSize: number;
+  isActive: boolean;
+}>`
+  pointer-events: ${(props) => (props.isActive ? "auto" : "none")};
+  opacity: ${(props) => (props.isActive ? 1 : 0.5)};
   width: 100%;
   border: 2px solid ${COLORS.mainColor};
   color: ${(props) =>
