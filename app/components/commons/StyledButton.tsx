@@ -7,8 +7,7 @@ interface StyledButtonProps {
   isBorder: boolean;
   isActive?: boolean;
   buttonText: string;
-  action?: any;
-  link: string;
+  action?: () => void;
   fontSize: number;
 }
 
@@ -16,7 +15,6 @@ const StyledButton: React.FC<StyledButtonProps> = ({
   isBorder,
   buttonText,
   action,
-  link,
   fontSize,
   isActive,
 }) => {
@@ -31,7 +29,7 @@ const StyledButton: React.FC<StyledButtonProps> = ({
       isBorder={isBorder}
       fontSize={fontSize}
       onClick={() => {
-        buttonClikHandler(link);
+        action && action();
       }}
       isActive={isActive !== undefined ? isActive : true}
     >
