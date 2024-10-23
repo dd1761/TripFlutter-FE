@@ -11,6 +11,8 @@
   "dependencies": {
     "@netlify/plugin-nextjs": "^5.7.4",
     "@types/react-select": "^5.0.1",
+    "@types/redux-logger": "^3.0.13",
+    "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^5.1.34",
     "@use-funnel/browser": "^0.0.7",
     "@use-funnel/next": "^0.0.8",
@@ -20,7 +22,12 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
+    "react-redux": "^9.1.2",
     "react-select": "^5.8.1",
+    "react-tooltip": "^5.28.0",
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "style-components": "^0.1.0",
     "styled-components": "^6.1.13"
   },
