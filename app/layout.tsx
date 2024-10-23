@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import GlobalStyle from "@/public/styles/global";
 import "./globals.css";
 import StyledComponentsRegistry from "@/lib/registry";
+import CommonProvider from "./redux/provider";
 
 const noto = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="kr">
       <GlobalStyle />
       <body className={noto.className}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <CommonProvider>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </CommonProvider>
       </body>
     </html>
   );
