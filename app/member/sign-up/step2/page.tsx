@@ -7,16 +7,44 @@ import Logo from "/public/images/logos/Trip-Flutter.png";
 import CommonHeader from "@/app/components/commons/CommonHeader";
 import StyledButton from "@/app/components/commons/StyledButton";
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 interface SignUpInput {
   email: string;
   password: string;
   passwordChk: string;
   nickname: string;
-  likeLocations: string[];
 }
 
+interface SelectOptions {
+  value: string;
+  label: string;
+}
+
+const LIKE_LOCATIONS: SelectOptions[] = [
+  { value: "강원도", label: "강원도" },
+  { value: "경기도", label: "경기도" },
+  { value: "서울", label: "서울" },
+  { value: "충청도", label: "충청도" },
+  { value: "경상도", label: "경상도" },
+  { value: "전라도", label: "전라도" },
+];
+
 const SignUpPage: React.FC = () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&])[A-Za-z\d!@#$&]{8,}$/;
+  const nicknameRegex = /^[가-힣a-zA-Z0-9]+$/;
+
+  // 각 항목 중복 검사 혹은 정규식 검사에 따른 안내 메시지 states
+  const [emailChk, setEmailChk] = useState<string | undefined>();
+  const [passwordValid, setPasswordValid] = useState<string | undefined>();
+  const [passwordValidChk, setPasswordValidChk] = useState<
+    string | undefined
+  >();
+  const [nicknameValid, setNicknameValid] = useState<string | undefined>();
+
+  // react-form-hook
   const {
     register,
     handleSubmit,
@@ -24,14 +52,37 @@ const SignUpPage: React.FC = () => {
     formState: { errors },
   } = useForm<SignUpInput>();
 
+  // router
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<SignUpInput> = (data: SignUpInput) => {
     alert(
-      `회원가입 처리 필요! \n 이메일 : ${data.email} \n 패스워드 : ${data.password} \n 닉네임 : ${data.nickname} \n 선호장소 : ${data.likeLocations}`
+      `회원가입 처리 필요! \n 이메일 : ${data.email} \n 패스워드 : ${data.password} \n 닉네임 : ${data.nickname}`
     );
+    router.push("/member/sign-up/complete");
   };
 
   const emailChkHandler = () => {
     alert(`이메일 중복 확인 처리 필요!`);
+    //TODO
+    // 이메일 정규식 검사 후 참일시 이메일 중복 검사 API 호출
+    // 이메일 정규식 검사 실패시
+    // -> 올바른 이메일 형식을 입력하라는 안내 input 하단에 표시할것
+    // 이메일 정규식 검사 성공 && 이메일 중복 검사 실패
+    // -> 이미 가입된 계정이므로 로그인 페이지로 이동하라는 안내 input 하단에 표시할것
+    // 이메일 정규식 검사 성공 && 이메일 중복 검사 성공
+    // -> 사용 가능한 이메일입니다 안내 input 하단에 표시할것
+  };
+
+  const nicknameChkHandler = () => {
+    // TODO
+    // 닉네임 정규식 검사 후 참일시 닉네임 중복 검사 API 호출
+    // 닉네임 정규식 검사 실패시
+    // -> 닉네임은 한글, 영대소문자, 숫자만 사용 가능하다는 안내 input 하단에 표시할것
+    // 닉네임 정규식 검사 성공 && 닉네임 중복 검사 실패
+    // -> 중복되어 사용할 수 없다는 안내 input 하단에 표시할것
+    // 닉네임 정규식 검사 성공 && 닉네임 중복 검사 성공
+    // -> 사용 가능한 닉네임입니다 안내 input 하단에 표시할것.
   };
 
   return (
@@ -55,52 +106,62 @@ const SignUpPage: React.FC = () => {
           </LogoContainer>
 
           <StyledForm onSubmit={handleSubmit(onSubmit)}>
-            <InputContainer>
+            <InputContainer isButton={true}>
               <div className={"input-title"}>이메일</div>
-              <div className={"input-and-button"}>
+              <div className={"input-with-button"}>
                 <input
                   type="text"
                   placeholder="이메일 입력"
                   {...register("email")}
                 />
-                <StyledButton
-                  isBorder={false}
-                  buttonText={"중복확인"}
-                  fontSize={14}
-                  action={() => {
-                    emailChkHandler();
-                  }}
-                />
+                <div className={"button-container"}>
+                  <StyledButton
+                    isBorder={false}
+                    fontSize={16}
+                    buttonText={"중복확인"}
+                    action={emailChkHandler}
+                  />
+                </div>
               </div>
             </InputContainer>
 
-            <InputContainer>
-              <div className={"input-title"}>패스워드</div>
+            <InputContainer isButton={false}>
+              <div className={"input-title"}>비밀번호</div>
               <input
-                type="text"
-                placeholder="패스워드 입력"
+                type="password"
+                placeholder="비밀번호 입력"
                 {...register("password")}
               />
             </InputContainer>
 
-            <InputContainer>
-              <div className={"input-title"}>패스워드 확인</div>
+            <InputContainer isButton={false}>
+              <div className={"input-title"}>비밀번호 확인</div>
               <input
-                type="text"
-                placeholder="동일한 패스워드를 입력하세요"
+                type="password"
+                placeholder="동일한 비밀번호 입력"
                 {...register("passwordChk")}
               />
             </InputContainer>
 
-            <InputContainer>
+            <InputContainer isButton={true}>
               <div className={"input-title"}>닉네임</div>
-              <input
-                type="text"
-                placeholder="닉네임 입력"
-                {...register("nickname")}
-              />
+              <div className={"input-with-button"}>
+                <input
+                  type="text"
+                  placeholder="닉네임 입력"
+                  {...register("nickname")}
+                />
+                <div className={"button-container"}>
+                  <StyledButton
+                    isBorder={false}
+                    fontSize={16}
+                    buttonText={"중복확인"}
+                    action={emailChkHandler}
+                  />
+                </div>
+              </div>
             </InputContainer>
-            <input type="submit" />
+            <input type="submit" value={"다음으로"} />
           </StyledForm>
         </SignupContentsContainer>
       </SignupContainer>
@@ -124,28 +185,21 @@ const SignupContainer = styled.div`
 const SignupContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
   gap: 32px;
 
   width: calc(100% - 40px);
-
-  /* margin-top: 200px; */
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`;
-
-const PageTitle = styled.div`
-  font-size: 20px;
-  line-height: 20px;
-  font-weight: 700;
+  width: calc(100% - 40px);
 `;
 
 const LogoWrapper = styled.div`
-  width: 60%;
+  width: 80%;
 `;
 
 const StyledForm = styled.form`
@@ -153,61 +207,13 @@ const StyledForm = styled.form`
 
   display: flex;
   flex-direction: column;
-  gap: 20px;
-`;
+  align-items: center;
+  gap: 24px;
 
-const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-
-  & > .input-title {
-    font-size: 20px;
-    line-height: 20px;
-    font-weight: 700;
-    color: ${COLORS.blackColor};
-  }
-
-  & > .input-and-button {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-
-    width: 105%;
-
-    & > input {
-      all: unset;
-      width: 90%;
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: solid 1px ${COLORS.greyColor};
-    }
-
-    & > button {
-      width: 30%;
-    }
-  }
-
-  input {
-    all: unset;
-
-    width: 100%;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: solid 1px ${COLORS.greyColor};
-  }
-
-  input ::placeholder {
-    font-size: 16px;
-    font-weight: 700;
-    color: ${COLORS.greyColor};
-  }
-
-  input[type="submit"] {
+  & > input[type="submit"] {
     all: unset;
     padding: 12px 16px;
-    margin-top: 20px;
+    margin-top: 52px;
     border-radius: 8px;
     border: 2px solid ${COLORS.mainColor};
     background-color: ${COLORS.mainColor};
@@ -216,12 +222,51 @@ const InputContainer = styled.div`
     cursor: pointer;
     font-size: 16px;
     font-weight: 700;
+    width: calc(100% - 32px);
   }
 
-  input[type="submit"]:hover {
+  & > input[type="submit"]:hover {
     background-color: ${COLORS.whiteColor};
     color: ${COLORS.mainColor};
     transition: 0.2s;
+  }
+`;
+
+const InputContainer = styled.div<{ isButton: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+
+  & > .input-with-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .input-title {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    color: ${COLORS.blackColor};
+  }
+
+  .button-container {
+    width: 30%;
+  }
+
+  input {
+    all: unset;
+    width: ${(props) => (props.isButton ? "70%" : "calc(100% - 32px)")};
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: solid 1px ${COLORS.greyColor};
+  }
+
+  input::placeholder {
+    font-size: 16px;
+    font-weight: 700;
+    color: ${COLORS.greyColor};
   }
 `;
 

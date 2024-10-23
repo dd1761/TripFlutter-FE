@@ -43,9 +43,9 @@ const ButtonContainer = styled.button<{
   fontSize: number;
   isActive: boolean;
 }>`
+  width: 100%;
   pointer-events: ${(props) => (props.isActive ? "auto" : "none")};
   opacity: ${(props) => (props.isActive ? 1 : 0.5)};
-  width: 100%;
   border: 2px solid ${COLORS.mainColor};
   color: ${(props) =>
     props.isBorder && props.isBorder === true

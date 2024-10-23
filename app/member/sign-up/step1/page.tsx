@@ -6,8 +6,11 @@ import Image from "next/image";
 import Logo from "/public/images/logos/Trip-Flutter.png";
 import CommonHeader from "@/app/components/commons/CommonHeader";
 import StyledButton from "@/app/components/commons/StyledButton";
+import { useRouter } from "next/navigation";
 
 const SignUpPage: React.FC = () => {
+  const router = useRouter();
+
   return (
     <DefaultLayout top={0} right={0} bottom={0} left={0} nav={false}>
       <SignupContainer>
@@ -36,7 +39,9 @@ const SignUpPage: React.FC = () => {
             isBorder={false}
             buttonText={"동의하고 계속"}
             fontSize={20}
-            link={"/meber/sign-up/step2"}
+            action={() => {
+              router.push("/member/sign-up/step2");
+            }}
           />
         </SignupContentsContainer>
       </SignupContainer>
