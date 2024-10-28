@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
   return (
     <DefaultLayout top={0} right={0} bottom={0} left={0} nav={false}>
       <LoginContainer>
-        <CommonHeader backLink={"/"} headerTitle={'로그인'} />
+        <CommonHeader backLink={"/"} headerTitle={"로그인"} />
 
         <Contents>
           <Image
@@ -76,7 +76,7 @@ const LoginPage: React.FC = () => {
             <Link href="/member/find-account">계정 찾기</Link>
             <div> | </div>
             <Link
-              href="/member/sign-up"
+              href="/member/sign-up/step1"
               style={{ color: `${COLORS.mainColor}`, fontWeight: "700" }}
             >
               회원 가입
