@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@firebase/auth": "^1.7.9",
     "@netlify/plugin-nextjs": "^5.7.4",
     "@reduxjs/toolkit": "^2.3.0",
     "@types/react-select": "^5.0.1",
@@ -19,7 +20,15 @@
     "@use-funnel/next": "^0.0.8",
     "@use-funnel/react-navigation-native": "^0.0.7",
     "@use-funnel/react-router-dom": "^0.0.7",
+    "@next-auth/mongodb-adapter": "^1.1.3",
+    "@types/styled-components": "^5.1.34",
+    "bcrypt": "^5.1.1",
+    "google-auth-library": "^9.14.2",
+    "jsonwebtoken": "^9.0.2",
+    "mogodb": "^0.0.1-security",
     "next": "14.2.5",
+    "next-auth": "^4.24.8",
+    "openai": "^4.67.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
