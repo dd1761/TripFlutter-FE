@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import CommonHeader from "../components/commons/CommonHeader";
 import Link from "next/link";
 import { Pencil } from "../components/commons/Icons";
+import LoadingModal from "../components/commons/LoadingModal";
+import DataTable from "../components/commons/DataTable";
 
 const MyPageIntroPage: React.FC = () => {
   const router = useRouter();
@@ -45,7 +47,18 @@ const MyPageIntroPage: React.FC = () => {
           <TableContainer>
             <TableTitle>최근 내 여정</TableTitle>
             {/* TODO : 테이블 구현 */}
-            <DummyTable>아직 여정이 없습니다.</DummyTable>
+            <DataTable
+              columns={[
+                { key: "date", label: "날짜" },
+                { key: "destination", label: "목적지" },
+                { key: "duration", label: "기간" },
+              ]}
+              data={[
+                { date: "2023-01-01", destination: "서울", duration: "3일" },
+                { date: "2023-02-15", destination: "부산", duration: "2일" },
+                { date: "2023-03-10", destination: "제주도", duration: "5일" },
+              ]}
+            />
           </TableContainer>
 
           <TableContainer>
