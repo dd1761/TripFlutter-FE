@@ -3,15 +3,19 @@ import styled from "styled-components";
 import DefaultLayout from "../components/DefaultLayout";
 import { COLORS } from "@/public/styles/colors";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CommonHeader from "../components/commons/CommonHeader";
 import Link from "next/link";
 import { Pencil } from "../components/commons/Icons";
 import LoadingModal from "../components/commons/LoadingModal";
 import DataTable from "../components/commons/DataTable";
+import AddFriends from "../components/mypage/AddFriends";
+import { render } from "react-dom";
 
 const MyPageIntroPage: React.FC = () => {
+  const [isClickedAddFriends, setIsClickedAddFriends] =
+    useState<boolean>(false);
   const router = useRouter();
   const user = useSelector((state: any) => state.user.user);
 
@@ -24,6 +28,7 @@ const MyPageIntroPage: React.FC = () => {
 
   return (
     <DefaultLayout top={0} right={0} bottom={0} left={0} nav={true}>
+      {isClickedAddFriends && <AddFriends />}
       <MyPageContainer>
         <CommonHeader backLink={"/"} headerTitle={"마이페이지"} />
 
@@ -47,18 +52,33 @@ const MyPageIntroPage: React.FC = () => {
           <TableContainer>
             <TableTitle>최근 내 여정</TableTitle>
             {/* TODO : 테이블 구현 */}
-            <DataTable
-              columns={[
-                { key: "date", label: "날짜" },
-                { key: "destination", label: "목적지" },
-                { key: "duration", label: "기간" },
-              ]}
-              data={[
-                { date: "2023-01-01", destination: "서울", duration: "3일" },
-                { date: "2023-02-15", destination: "부산", duration: "2일" },
-                { date: "2023-03-10", destination: "제주도", duration: "5일" },
-              ]}
-            />
+            <SimpleDataTable>
+              <TableContent>
+                <div className={"title"}>강릉 1박 2일</div>
+                <div className={"duration"}>2024.05.25 ~ 2024.05.25</div>
+                <Link className={"detail"} href={"#"}>
+                  자세히 보기
+                </Link>
+              </TableContent>
+
+              <TableContent>
+                <div className={"title"}>강릉 1박 2일</div>
+                <div className={"duration"}>2024.05.25 ~ 2024.05.25</div>
+                <Link className={"detail"} href={"#"}>
+                  자세히 보기
+                </Link>
+              </TableContent>
+
+              <TableContent>
+                <div className={"title"}>강릉 1박 2일</div>
+                <div className={"duration"}>2024.05.25 ~ 2024.05.25</div>
+                <Link className={"detail"} href={"#"}>
+                  자세히 보기
+                </Link>
+              </TableContent>
+
+              <MoreButton>더보기</MoreButton>
+            </SimpleDataTable>
           </TableContainer>
 
           <TableContainer>
@@ -72,7 +92,7 @@ const MyPageIntroPage: React.FC = () => {
               내 친구{" "}
               <FriendAddButton
                 onClick={() => {
-                  alert("친구 추가");
+                  setIsClickedAddFriends(true);
                 }}
               >
                 친구 추가
@@ -232,6 +252,74 @@ const FriendAddButton = styled.button`
 
   border-radius: 16px;
   border: 1px solid ${COLORS.greyColor};
+  color: ${COLORS.mainColor};
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SimpleDataTable = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 12px;
+  width: calc(100% - 24px);
+
+  border: 1px solid ${COLORS.greyColor};
+  border-radius: 8px;
+`;
+
+const TableContent = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+
+  width: calc(100% - 24px);
+  padding: 12px;
+
+  border-bottom: 1px solid ${COLORS.greyColor};
+
+  & > .title {
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 900;
+  }
+
+  & > .duration {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 500;
+  }
+
+  & > .detail {
+    all: unset;
+
+    position: absolute;
+    right: 0;
+    margin-right: 12px;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 700;
+    color: ${COLORS.mainColor};
+  }
+
+  & > .detail:hover {
+    cursor: pointer;
+  }
+`;
+
+const MoreButton = styled.button`
+  all: unset;
+
+  width: 100%;
+  text-align: center;
+
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
   color: ${COLORS.mainColor};
 
   &:hover {

@@ -57,6 +57,7 @@ const DataTable = ({
   useEffect(() => {
     if (data) {
       setSortedData(data);
+      console.log(columns);
     }
   }, [data]);
 
@@ -166,6 +167,7 @@ const DataTable = ({
               </tr>
             )}
           </thead>
+
           <tbody>
             {(sortedData.length > 0 ? sortedData : data).map(
               (rowData, rowIndex) => (
@@ -182,18 +184,6 @@ const DataTable = ({
                   }}
                 >
                   {columns.map((column, columnIndex) => {
-                    if (column.render) {
-                      return (
-                        <td
-                          key={columnIndex}
-                          style={{
-                            textAlign: column?.align ? column.align : "center",
-                          }}
-                        >
-                          {column.render(rowData, rowIndex)}
-                        </td>
-                      );
-                    }
                     return (
                       <td
                         key={columnIndex}
@@ -201,6 +191,7 @@ const DataTable = ({
                           textAlign: column?.align ? column.align : "center",
                         }}
                       >
+                        {console.log(`${column.key} : ${rowData[column.key]}`)}
                         {rowData[column.key]}
                       </td>
                     );
@@ -282,7 +273,7 @@ const StyledTable = styled.table<{
 const StyledTableHeader = styled.div`
   width: 100%;
   height: 44px;
-  background: #f4f4f4;
+  background: #000;
   border-radius: 16px 16px 0px 0px;
   box-shadow: 0px 0px 0px 1px rgba(152, 161, 178, 0.1),
     0px 1px 4px rgba(69, 75, 87, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.08);
@@ -290,6 +281,8 @@ const StyledTableHeader = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
+
+  width: 100%;
 
   margin-top: 0px;
   font-size: 14px;
@@ -309,6 +302,9 @@ const TableTitle = styled.div`
 const StyledRow = styled.tr<{ rowColor?: string }>`
   background-color: ${(props) => props.rowColor || "#fff"};
 
+  display: flex;
   justify-content: space-between;
   align-items: center;
+
+  width: 100%;
 `;
