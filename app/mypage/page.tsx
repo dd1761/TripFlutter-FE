@@ -8,10 +8,7 @@ import { useRouter } from "next/navigation";
 import CommonHeader from "../components/commons/CommonHeader";
 import Link from "next/link";
 import { Pencil } from "../components/commons/Icons";
-import LoadingModal from "../components/commons/LoadingModal";
-import DataTable from "../components/commons/DataTable";
 import AddFriends from "../components/mypage/AddFriends";
-import { render } from "react-dom";
 
 const MyPageIntroPage: React.FC = () => {
   const [isClickedAddFriends, setIsClickedAddFriends] =
@@ -28,7 +25,9 @@ const MyPageIntroPage: React.FC = () => {
 
   return (
     <DefaultLayout top={0} right={0} bottom={0} left={0} nav={true}>
-      {isClickedAddFriends && <AddFriends />}
+      {isClickedAddFriends && (
+        <AddFriends setIsClickedAddFriends={setIsClickedAddFriends} />
+      )}
       <MyPageContainer>
         <CommonHeader backLink={"/"} headerTitle={"마이페이지"} />
 

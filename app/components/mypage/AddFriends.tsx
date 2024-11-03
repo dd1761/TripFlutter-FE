@@ -1,8 +1,32 @@
 "use client";
 import { COLORS } from "@/public/styles/colors";
 import { styled } from "styled-components";
+import { SetStateAction, useEffect, useState } from "react";
 
-const AddFriends = () => {
+interface AddFriendsModalProps {
+  setIsClickedAddFriends: React.Dispatch<SetStateAction<boolean>>;
+}
+const AddFriends: React.FC<AddFriendsModalProps> = ({
+  setIsClickedAddFriends,
+}) => {
+  const [isActiveButton, setIsActiveButton] = useState<boolean>(false);
+  const [friendsCode, setFriendsCode] = useState<string>("");
+  const fourDigitCodeRegex = /^\d{4}$/;
+
+  useEffect(() => {
+    if (fourDigitCodeRegex.test(friendsCode)) {
+      setIsActiveButton(true);
+    } else {
+      setIsActiveButton(false);
+    }
+  }, [friendsCode]);
+
+  const buttonClickHandler = () => {
+    // 이곳에 친구 신청 API 호출 핸들링
+    alert("친구 신청이 완료되었습니다.");
+    setIsClickedAddFriends(false);
+  };
+
   return (
     <Container>
       <Box>
@@ -11,7 +35,16 @@ const AddFriends = () => {
           <div className="modal-desc">
             4자리 코드를 통해 친구 신청을 보낼 수 있습니다.
           </div>
-          <input type="text" placeholder="4자리 숫자 코드 입력" />
+          <input
+            type="text"
+            placeholder="4자리 숫자 코드 입력"
+            onChange={(e) => {
+              setFriendsCode(e.target.value);
+            }}
+          />
+          <Button $isActive={isActiveButton} onClick={buttonClickHandler}>
+            친구 신청
+          </Button>
         </BoxContainer>
       </Box>
     </Container>
@@ -37,7 +70,7 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 420px;
-  height: 160px;
+  height: 200px;
 
   border-radius: 16px;
   background: ${COLORS.whiteColor};
@@ -73,6 +106,29 @@ const BoxContainer = styled.div`
     line-height: 14px;
     border-radius: 8px;
     border: 1px solid ${COLORS.greyColor};
+  }
+`;
+
+const Button = styled.button<{ $isActive: boolean }>`
+  all: unset;
+
+  margin-top: 12px;
+  padding: 8px 32px;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+
+  border: ${({ $isActive }) =>
+    $isActive
+      ? `2px solid ${COLORS.mainColor}`
+      : `2px solid ${COLORS.greyColor}`};
+  border-radius: 16px;
+  color: ${({ $isActive }) =>
+    $isActive ? `${COLORS.mainColor}` : `${COLORS.greyColor}`};
+
+  &:hover {
+    cursor: ${({ $isActive }) => ($isActive ? "pointer" : "not-allowed")};
   }
 `;
 
