@@ -39,7 +39,8 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "style-components": "^0.1.0",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "tripflutter_fe": "file:"
   },
   "devDependencies": {
     "@swc/plugin-styled-components": "^3.0.2",
