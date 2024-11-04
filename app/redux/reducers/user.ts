@@ -6,7 +6,8 @@ const initialState = {
     id: 2123,
     nickname: '김여행',
     email: 'test@test.com',
-    desc: '강원도 여행을 좋아하는 김여행입니다.'
+    desc: '강원도 여행을 좋아하는 김여행입니다.',
+    profileImg: '/images/dummy_profile.jpg',
   }
 }
 

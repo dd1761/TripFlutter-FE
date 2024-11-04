@@ -7,8 +7,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CommonHeader from "../components/commons/CommonHeader";
 import Link from "next/link";
+import Image from "next/image";
 import { Pencil } from "../components/commons/Icons";
 import AddFriends from "../components/mypage/AddFriends";
+import ReviewsContainer from "../components/mypage/ReviewesContainer";
 
 const MyPageIntroPage: React.FC = () => {
   const [isClickedAddFriends, setIsClickedAddFriends] =
@@ -34,7 +36,13 @@ const MyPageIntroPage: React.FC = () => {
         <Contents>
           <ProfileContainer>
             <BasicProfile>
-              <ProfileImage />
+              <ProfileImage>
+                <Image
+                  src={user.profileImg}
+                  layout="fill"
+                  alt={"profile-image"}
+                />
+              </ProfileImage>
               <ProfileInfo>
                 <div className={"user-name"}>
                   {user.nickname} (#{user.id})
@@ -83,7 +91,8 @@ const MyPageIntroPage: React.FC = () => {
           <TableContainer>
             <TableTitle>내 리뷰</TableTitle>
             {/* TODO : 테이블 구현 */}
-            <DummyTable>아직 남긴 리뷰가 없습니다.</DummyTable>
+            {/* <DummyTable>아직 남긴 리뷰가 없습니다.</DummyTable> */}
+            <ReviewsContainer />
           </TableContainer>
 
           <TableContainer>
@@ -145,11 +154,13 @@ const BasicProfile = styled.div`
 `;
 
 const ProfileImage = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 120px;
   height: 120px;
+  overflow: hidden;
   border-radius: 50%;
   background-color: ${COLORS.greyColor};
 `;
