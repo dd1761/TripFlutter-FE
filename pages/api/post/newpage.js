@@ -9,7 +9,7 @@ async function createPost(title, content) {
     }
 
     // MongoDB 연결 및 데이터 삽입
-    const db = (await connectDB).db('forum');
+    const db = (await connectDB).db('test');
     let result = await db.collection('post').insertOne({ title, content, createdAt: new Date() });
 
     return result;

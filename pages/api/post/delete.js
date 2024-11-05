@@ -3,7 +3,7 @@ import {connectDB} from "../../../utils/database";
 
 export default async function handler(req, res){
     if(req.method === 'POST'){
-        const db = (await connectDB).db('forum');
+        const db = (await connectDB).db('test');
 
         try{
             let result = await db.collection('post').deleteOne(

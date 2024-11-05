@@ -19,6 +19,7 @@ export default async function handler(req, res) {
                 numOfRows: 5,
                 pageNo: 1,
                 MobileOS: 'ETC',
+                _type: 'json',
                 MobileApp: '트리플러터',
                 keyword: region,
                 contentTypeId: 12,

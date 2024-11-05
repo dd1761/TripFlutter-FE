@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
         const { email, password, name, trip_spot } = req.body;
 
-        let db = (await connectDB).db('forum');
+        let db = (await connectDB).db('test');
 
         // 이메일 중복 검사
         const existingUser = await db.collection('user_cred').findOne({ email: email });
@@ -14,9 +14,13 @@ export default async function handler(req, res) {
             return;
         }
 
+        // 현재 최대 id 값 가져오기
+        const lastUser = await db.collection('user_cred').find().sort({ id: -1 }).limit(1).toArray();
+        const newId = lastUser.length > 0 && lastUser[0].id ? parseInt(lastUser[0].id, 10) + 1 : 1;
+
         // 비밀번호 암호화 후 사용자 등록
         const hash = await bcrypt.hash(password, 10);
-        await db.collection('user_cred').insertOne({ email, password: hash, name, trip_spot });
+        await db.collection('user_cred').insertOne({ id: newId, email, password: hash, name, trip_spot });
 
         res.status(200).json('가입성공');
     } else {
