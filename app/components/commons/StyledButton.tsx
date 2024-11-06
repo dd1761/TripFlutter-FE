@@ -1,33 +1,52 @@
 "use client";
 import styled from "styled-components";
 import { COLORS } from "@/public/styles/colors";
+import { useRouter } from "next/navigation";
 
 interface StyledButtonProps {
-  isBorder?: boolean;
+  isBorder: boolean;
+  isActive?: boolean;
   buttonText: string;
-  action?: any;
-  link?: string;
+  action?: () => void;
+  fontSize: number;
 }
 
 const StyledButton: React.FC<StyledButtonProps> = ({
   isBorder,
   buttonText,
   action,
-  link,
+  fontSize,
+  isActive,
 }) => {
+  const router = useRouter();
+
+  const buttonClikHandler = (link: string) => {
+    router.replace(link);
+  };
+
   return (
-    isBorder && (
-      <ButtonContainer isBorder={isBorder}>{buttonText}</ButtonContainer>
-    )
+    <ButtonContainer
+      isBorder={isBorder}
+      fontSize={fontSize}
+      onClick={() => {
+        action && action();
+      }}
+      isActive={isActive !== undefined ? isActive : true}
+    >
+      {buttonText}
+    </ButtonContainer>
   );
 };
 
-const ButtonContainer = styled.button<{ isBorder?: boolean }>`
+const ButtonContainer = styled.button<{
+  isBorder: boolean;
+  fontSize: number;
+  isActive: boolean;
+}>`
   width: 100%;
-  ${(props) =>
-    props.isBorder &&
-    props.isBorder === true &&
-    `border: 2px solid ${COLORS.mainColor}`};
+  pointer-events: ${(props) => (props.isActive ? "auto" : "none")};
+  opacity: ${(props) => (props.isActive ? 1 : 0.5)};
+  border: 2px solid ${COLORS.mainColor};
   color: ${(props) =>
     props.isBorder && props.isBorder === true
       ? COLORS.mainColor
@@ -38,7 +57,7 @@ const ButtonContainer = styled.button<{ isBorder?: boolean }>`
       : COLORS.mainColor};
   border-radius: 8px;
   padding: 8px;
-  font-size: 12px;
+  font-size: ${(props) => `${props.fontSize}px`};
   font-weight: 900;
 
   &:hover {

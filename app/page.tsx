@@ -6,8 +6,10 @@ import LocationThumbNailCard from "./components/main/LocationThumbNailCard";
 import PopularLocationCard from "./components/main/PopularLocationCard";
 import StyledButton from "./components/commons/StyledButton";
 import DUMMY_UDO from "/public/images/dummy_udo.png";
+import { useRouter } from "next/navigation";
 
 const Home: React.FC = () => {
+  const router = useRouter();
   const DUMMY_LOCATION: string[] = [
     "서울",
     "경기",
@@ -60,6 +62,10 @@ const Home: React.FC = () => {
         <StyledButton
           isBorder={true}
           buttonText={"트리플러터에게 떠나고 싶은 여행을 알려주세요!"}
+          fontSize={16}
+          action={() => {
+            router.push("trip/create");
+          }}
         />
       </ContentsContainer>
 
