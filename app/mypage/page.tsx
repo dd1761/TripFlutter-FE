@@ -11,6 +11,30 @@ import Image from "next/image";
 import { Pencil } from "../components/commons/Icons";
 import AddFriends from "../components/mypage/AddFriends";
 import ReviewsContainer from "../components/mypage/ReviewesContainer";
+import FriendsList, { Friends } from "../components/mypage/FriendsList";
+
+const DUMMY_FRIENDS: Friends[] = [
+  {
+    profileImg: "/images/dummy_profile.jpg",
+    userName: "김동빈",
+    userId: 1234,
+  },
+  {
+    profileImg: "/images/dummy_profile.jpg",
+    userName: "전채린",
+    userId: 4567,
+  },
+  {
+    profileImg: "/images/dummy_profile.jpg",
+    userName: "정승민",
+    userId: 8910,
+  },
+  {
+    profileImg: "/images/dummy_profile.jpg",
+    userName: "김택연",
+    userId: 5630,
+  },
+];
 
 const MyPageIntroPage: React.FC = () => {
   const [isClickedAddFriends, setIsClickedAddFriends] =
@@ -90,7 +114,6 @@ const MyPageIntroPage: React.FC = () => {
 
           <TableContainer>
             <TableTitle>내 리뷰</TableTitle>
-            {/* TODO : 테이블 구현 */}
             {/* <DummyTable>아직 남긴 리뷰가 없습니다.</DummyTable> */}
             <ReviewsContainer />
           </TableContainer>
@@ -108,7 +131,8 @@ const MyPageIntroPage: React.FC = () => {
             </TableTitle>
 
             {/* TODO : 테이블 구현 */}
-            <DummyTable>아직 추가한 친구가 없습니다.</DummyTable>
+            {/* <DummyTable>아직 추가한 친구가 없습니다.</DummyTable> */}
+            <FriendsList friendsList={DUMMY_FRIENDS} />
           </TableContainer>
         </Contents>
       </MyPageContainer>
@@ -122,9 +146,13 @@ const MyPageContainer = styled.div`
   align-items: center;
   gap: 20px;
 
+  margin-bottom: 120px;
+  padding: 0px 16px;
+
   min-width: 320px;
   max-width: 600px;
-  width: 100%;
+
+  width: calc(100% - 32px);
   height: 100%;
 `;
 
@@ -134,9 +162,7 @@ const Contents = styled.div`
   align-items: center;
   gap: 36px;
 
-  width: calc(100% - 40px);
-
-  /* margin-top: 200px; */
+  width: 100%;
 `;
 
 const ProfileContainer = styled.div`
@@ -144,7 +170,8 @@ const ProfileContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  width: calc(100% - 40px);
+  padding: 0px 12px;
+  width: 100%;
 `;
 
 const BasicProfile = styled.div`
@@ -221,30 +248,6 @@ const TableTitle = styled.div`
   font-size: 24px;
   font-weight: 700;
   line-height: 24px;
-`;
-
-const DummyTable = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 16px;
-  width: calc(100% - 32px);
-  border: 1px solid ${COLORS.greyColor};
-  border-radius: 8px;
-
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 20px;
-  color: ${COLORS.mainColor};
-
-  & > .friend-title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
 `;
 
 const FriendAddButton = styled.button`
