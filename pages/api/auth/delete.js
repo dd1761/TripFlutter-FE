@@ -1,7 +1,7 @@
 export default async function handler(req, res){
     if(req.method === 'POST'){
         console.log(req.body);
-        const db = (await connectDB).db('forum');
+        const db = (await connectDB).db('test');
         let result = await db.collection('post').deleteOne(
             { _id: new ObjectId(req.body._id) }
         );

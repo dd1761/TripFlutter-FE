@@ -8,7 +8,7 @@ export default async function handler(req, res) {
             const { email, password } = req.body;
 
             // DB 연결 및 유저 확인
-            let db = (await connectDB).db('forum');
+            let db = (await connectDB).db('test');
             let user = await db.collection('user_cred').findOne({ email });
 
             if (!user) {

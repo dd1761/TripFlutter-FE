@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
         try {
             // MongoDB 연결 및 데이터 조회
-            const db = (await connectDB).db('forum');
+            const db = (await connectDB).db('test');
             let result = await db.collection('post').find().toArray();
 
             // 데이터를 JSON 형태로 반환

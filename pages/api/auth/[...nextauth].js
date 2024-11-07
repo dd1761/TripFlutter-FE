@@ -21,7 +21,7 @@ export const authOptions = {
             },
 
             async authorize(credentials) {
-                let db = (await connectDB).db('forum');
+                let db = (await connectDB).db('test');
                 let user = await db.collection('user_cred').findOne({ email: credentials.email });
                 if (!user) {
                     console.log('해당 이메일은 없음');
