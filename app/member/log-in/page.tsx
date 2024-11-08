@@ -7,12 +7,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import Logo from "/public/images/logos/Trip-Flutter.png";
 import CommonHeader from "@/app/components/commons/CommonHeader";
+import axios from "axios";
 
 /*
   TODO
 
   - 메인 화면 하단 네비게이션 바에서 '마이페이지' 메뉴 클릭시 '로그인이 필요합니다' 안내 후 로그인 화면으로 이동하는 모달 구현
-  - 
+  -
 */
 
 interface LoginInput {
@@ -29,9 +30,26 @@ const LoginPage: React.FC = () => {
   } = useForm<LoginInput>();
 
   const onSubmit: SubmitHandler<LoginInput> = (data: LoginInput) => {
-    alert(
-      `로그인 처리 필요! / 로그인 정보 :  이메일 - ${data.email} .. 비밀번호 - ${data.password}`
-    );
+    // alert(
+    //   `로그인 처리 필요! / 로그인 정보 :  이메일 - ${data.email} .. 비밀번호 - ${data.password}`
+    // );
+    axios.post('/api/auth/login', data)
+        .then(response => {
+          console.log('Success:', response.data);
+        })
+        .catch(error => {
+          // 서버 오류 또는 요청 오류 처리
+          if (error.response) {
+            // 서버에서 응답을 받았지만 오류가 있는 경우
+            console.error('Error response:', error.response.data);
+          } else if (error.request) {
+            // 요청이 이루어졌으나 응답을 받지 못한 경우
+            console.error('Error request:', error.request);
+          } else {
+            // 다른 오류 (예: 설정 오류)
+            console.error('Error message:', error.message);
+          }
+        });
   };
 
   return (

@@ -42,10 +42,17 @@ export default async function handler(req, res) {
 
         try {
             console.log('Inserting or updating the title, views, and firstimage in the database...');
+
+            // Get the current max postid and increment it by 1
+            const currentMaxPostIdDoc = await db.collection('views').find().sort({ postid: -1 }).limit(1).toArray();
+            const currentMaxPostId = currentMaxPostIdDoc.length > 0 ? currentMaxPostIdDoc[0].postid : 0;
+            const newPostId = currentMaxPostId + 1;
+
             const filter = { title: item.title };
             const update = {
                 $inc: { views: 1 },
                 $setOnInsert: {
+                    postid: newPostId, // Incremental postid
                     title: item.title,
                     firstimage: item.firstimage,
                     createdAt: new Date()
