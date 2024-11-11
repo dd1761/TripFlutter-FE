@@ -21,12 +21,17 @@ export default async function handler(req, res) {
 
             const db = (await connectDB).db('test');
 
+            // postId 자동 생성 (1부터 차례로 증가)
+            const latestPost = await db.collection('reviews').find().sort({ postId: -1 }).limit(1).toArray();
+            const newPostId = latestPost.length > 0 ? latestPost[0].postId + 1 : 1;
+
             const newPost = {
-                title: title,
-                content: content,
+                postId: newPostId,
+                title,
+                content,
                 images: images || [],
-                user_id: user_id,
-                author: author,
+                user_id,
+                author,
                 createdAt: new Date()
             };
 

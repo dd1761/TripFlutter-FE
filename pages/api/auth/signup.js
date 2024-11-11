@@ -18,9 +18,21 @@ export default async function handler(req, res) {
         const lastUser = await db.collection('user_cred').find().sort({ id: -1 }).limit(1).toArray();
         const newId = lastUser.length > 0 && lastUser[0].id ? parseInt(lastUser[0].id, 10) + 1 : 1;
 
+        // 고유한 태그 생성 (0000부터 9999까지)
+        let uniqueTag;
+        let isUnique = false;
+        while (!isUnique) {
+            const randomTag = String(Math.floor(1000 + Math.random() * 9000)).padStart(4, '0');
+            const existingTag = await db.collection('user_cred').findOne({ name_tag: `${name}#${randomTag}` });
+            if (!existingTag) {
+                uniqueTag = `#${randomTag}`;
+                isUnique = true;
+            }
+        }
+
         // 비밀번호 암호화 후 사용자 등록
         const hash = await bcrypt.hash(password, 10);
-        await db.collection('user_cred').insertOne({ id: newId, email, password: hash, name, trip_spot });
+        await db.collection('user_cred').insertOne({ id: newId, email, password: hash, name, name_tag: uniqueTag, trip_spot });
 
         res.status(200).json('가입성공');
     } else {
