@@ -118,6 +118,24 @@ export const ArrowLeft: React.FC<SVGProps> = ({ color, width, height }) => {
     </SVG>
   );
 };
+
+// 수정 아이콘
+export const Pencil: React.FC<SVGProps> = ({ color, width, height }) => {
+  return (
+    <SVG
+      width={width}
+      height={height}
+      viewBox="0 0 10 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.67858 1.8209L8.1789 4.32123L2.74955 9.75058L0.520316 9.99666C0.221886 10.0297 -0.0302558 9.77733 0.00294641 9.4789L0.250987 7.2481L5.67858 1.8209ZM9.72535 1.44864L8.55136 0.274651C8.18515 -0.0915504 7.59123 -0.0915504 7.22502 0.274651L6.12056 1.37911L8.62089 3.87944L9.72535 2.77498C10.0915 2.40858 10.0915 1.81485 9.72535 1.44864Z"
+        fill={color}
+      />
+    </SVG>
+  );
+};
 const SVG = styled.svg`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
