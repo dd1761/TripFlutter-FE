@@ -27,7 +27,9 @@ export default function DetailPage() {
 
         let decodedTitle = '';
         try {
-            decodedTitle = decodeURIComponent(title);
+            if (typeof title === "string") {
+                decodedTitle = decodeURIComponent(title);
+            }
         } catch (e) {
             console.error('Failed to decode title:', e);
             setError('Invalid title format.');

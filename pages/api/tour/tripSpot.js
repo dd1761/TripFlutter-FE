@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     }
 
     const { region } = req.query; // GET 요청이므로 쿼리로 region을 받습니다.
+    const {pageNo} = req.query;
     if (!region) {
         return res.status(400).json({ message: 'Region parameter is required' });
     }
@@ -16,8 +17,8 @@ export default async function handler(req, res) {
     try {
         const response = await axios.get(url, {
             params: {
-                numOfRows: 5,
-                pageNo: 1,
+                numOfRows: 20,
+                pageNo: pageNo,
                 MobileOS: 'ETC',
                 _type: 'json',
                 MobileApp: '트리플러터',
