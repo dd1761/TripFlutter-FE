@@ -1,0 +1,153 @@
+/* QuickTripCreation.module.css */
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+
+.select,
+.inputDate,
+.inputNumber {
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.select:focus,
+.inputDate:focus,
+.inputNumber:focus {
+  border-color: #5f9ea0;
+  outline: none;
+  background-color: #fff;
+}
+
+.dateRange {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.separator {
+  font-size: 1.5em;
+  color: #555;
+}
+
+.checkboxLabel,
+.radioLabel {
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+}
+
+.checkboxLabel:hover,
+.radioLabel:hover {
+  background-color: #e3e3e3;
+}
+
+.checkbox,
+.radio {
+  margin-right: 12px;
+  transform: scale(1.2);
+}
+
+.submitButton {
+  padding: 15px 25px;
+  width: 100%;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #fff;
+  background-color: #4496CA;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center;
+}
+
+.submitButton:hover {
+  background-color: #4682b4;
+}
+
+.submitButton:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(95, 158, 160, 0.6);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.checkboxLabel,
+.radioLabel {
+  font-weight: 500;
+}
+
+.input {
+  padding: 12px;
+  font-size: 1.1em;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #5f9ea0;
+  outline: none;
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.6em;
+  }
+
+  .form {
+    gap: 20px;
+  }
+
+  .submitButton {
+    padding: 12px 20px;
+    font-size: 1em;
+  }
+}
