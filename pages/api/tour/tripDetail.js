@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { connectDB } from "@/utils/database";
 
 export default async function handler(req, res) {
     if (req.method !== 'GET') {
@@ -34,8 +35,47 @@ export default async function handler(req, res) {
             return res.status(404).json({ message: 'No data found' }); // 데이터가 없을 때 처리
         }
 
-        res.status(200).json(items[0]); // 단일 항목 반환
+        const item = items[0];
+        console.log('Data fetched successfully:', item);
+
+        let db = (await connectDB).db('test');
+
+        try {
+            console.log('Inserting or updating the title, views, and firstimage in the database...');
+
+            // Get the current max postid and increment it by 1
+            const currentMaxPostIdDoc = await db.collection('views').find().sort({ postid: -1 }).limit(1).toArray();
+            const currentMaxPostId = currentMaxPostIdDoc.length > 0 ? currentMaxPostIdDoc[0].postid : 0;
+            const newPostId = currentMaxPostId + 1;
+
+            const filter = { title: item.title };
+            const update = {
+                $inc: { views: 1 },
+                $setOnInsert: {
+                    postid: newPostId, // Incremental postid
+                    title: item.title,
+                    firstimage: item.firstimage,
+                    createdAt: new Date()
+                }
+            };
+            const options = { upsert: true, returnDocument: 'after' };
+
+            const updatedDocument = await db.collection('views').findOneAndUpdate(filter, update, options);
+            const updatedViews = updatedDocument.value ? updatedDocument.value.views : 1;
+            console.log('Title, views, and firstimage updated or inserted successfully');
+
+            res.status(200).json({
+                title: item.title,
+                views: updatedViews,
+                firstimage: item.firstimage,
+                overview: item.overview
+            }); // 단일 항목 반환
+        } catch (dbError) {
+            console.error('Error saving data to DB:', dbError);
+            return res.status(500).json({ message: 'Failed to save data to DB', error: dbError.message });
+        }
     } catch (error) {
+        console.error('Error fetching data:', error);
         res.status(500).json({ message: 'Failed to fetch data', error: error.message });
     }
 }
