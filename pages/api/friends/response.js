@@ -54,4 +54,3 @@ export default async function friendRequestHandler(req, res) {
         res.status(500).json({ message: 'Failed to process friend request', error: error.message });
     }
 }
-

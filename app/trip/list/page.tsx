@@ -15,9 +15,14 @@ export default function ListPage() {
                 // API 호출: 서울 지역의 관광지 정보를 가져옴
                 const response = await axios.get('/api/tour/tripSpot', {
                     params: {
-                        region: '강원', // 기본적으로 '서울'로 설정, 사용자 입력에 따라 동적으로 변경 가능
-                        page: 1
+                        region: "제주", // 기본적으로 '서울'로 설정, 사용자 입력에 따라 동적으로 변경 가능
+                        pageNo: 1
                     },
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
                 });
 
                 // 데이터 설정

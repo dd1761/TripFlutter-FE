@@ -1,16 +1,26 @@
 import { connectDB } from "@/utils/database";
+import jwt from 'jsonwebtoken';
 
 export default async function friendRequestHandler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
 
-    const { requesterTag, recipientTag } = req.body;
-    if (!requesterTag || !recipientTag) {
-        return res.status(400).json({ message: 'Requester and recipient tags are required' });
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return res.status(401).json({ message: 'Authentication token is required' });
+    }
+
+    const { recipientTag } = req.body;
+    if (!recipientTag) {
+        return res.status(400).json({ message: 'Recipient tag is required' });
     }
 
     try {
+        // Verify JWT token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || "qwer1234");
+        const requesterTag = decoded.name_tag;
+
         // Connect to the database
         const client = await connectDB;
         const db = client.db('test');
@@ -44,6 +54,9 @@ export default async function friendRequestHandler(req, res) {
 
         res.status(200).json({ message: 'Friend request sent successfully and added to f_request table' });
     } catch (error) {
+        if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+            return res.status(401).json({ message: 'Invalid or expired token' });
+        }
         res.status(500).json({ message: 'Failed to send friend request', error: error.message });
     }
 }
