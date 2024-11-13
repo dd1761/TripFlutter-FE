@@ -1,0 +1,44 @@
+.tripCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #dfe3e8;
+    border-radius: 12px;
+    background-color: #f9fafc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.tripCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.cardContent {
+    margin-bottom: 12px;
+}
+
+.cardTitle {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cardExcerpt {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
