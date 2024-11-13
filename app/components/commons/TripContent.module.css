@@ -1,0 +1,35 @@
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tripDetails {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.daySection {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.daySection h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.daySection p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}

@@ -58,6 +58,18 @@ const Home: React.FC = () => {
       </LocationContainer>
 
       <ContentsContainer>
+        <ContentsTitle>간편 여행 계획하기</ContentsTitle>
+        <StyledButton
+          isBorder={true}
+          buttonText={"간편 입력으로 트리플러터에게 여행 추천 받기!"}
+          fontSize={16}
+          action={() => {
+            router.push("trip/quick-create");
+          }}
+        />
+      </ContentsContainer>
+
+      <ContentsContainer>
         <ContentsTitle>바로 여행 계획하기</ContentsTitle>
         <StyledButton
           isBorder={true}
